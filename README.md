@@ -1,3 +1,3 @@
 # reset-password-nodejs
 
-An article to reset a user password
+An api to signup, login, and reset a user password

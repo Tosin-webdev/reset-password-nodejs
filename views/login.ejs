@@ -1,0 +1,46 @@
+<!-- Login page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <form action="/api/login">
+      <h2>Login</h2>
+      <label for="email">Email</label>
+      <input type="text" name="email" required /> <br />
+      <label for="password">Password</label>
+      <input type="password" name="password" required /> <br />
+      <button>login</button>
+    </form>
+
+    <script>
+      const form = document.querySelector('form');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        // get form values
+        const email = form.email.value;
+        const password = form.password.value;
+
+        try {
+          // fetches the data from the login api
+          const res = await fetch('/api/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password }),
+            headers: { 'Content-Type': 'application/json' },
+          });
+          const data = await res.json();
+          if (data.user) {
+            alert('login successful!');
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    </script>
+  </body>
+</html>
